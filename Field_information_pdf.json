@@ -1,0 +1,169 @@
+{
+	"Agent": {
+
+		"AirAsia (India) Ltd": "AirAsia",
+		"InterGlobe Aviation Limited": "InterGlobe Aviation Limited",
+		"Go Airlines (India) Ltd": "Go Airlines",
+		"TATA SIA Airlines Limited":"TATA SIA Airlines Limited",
+		"SpiceJet Limited":"SpiceJet Limited"
+	},
+	"TATA SIA Airlines Limited":{
+		"Simple": {
+			"invoice_number": ["^Invoice No.", "", ""],
+			"invoice_date": ["^Invoice Date", "", ""],
+			"passenger_name":["^Passenger Name","",""],
+			"pnr_number": ["^Ticket number", "", ""],
+			"flight_from":["^Place of Embarkation","",""],
+			"flight_to":["^Place of Disembarkation","",""],
+			"placeofsupply": ["^Place of supply", "", ""],
+			"gst_no (Supplier)": ["^GSTN", "", ""],
+			"name (Receiver)": ["^Name", "invoice", ""],
+			"address (Receiver)":["^Address","",""],
+			"gst_no (Receiver)": ["^GSTN", "", "Tax Invoice"],
+
+			"description (table)":["^Description of Service","",""],
+			"sac_code (table)":["^sac code","",""],
+			"discount (table)":["^discount","",""],
+			"taxable_amount (table)":["^Total taxable value","",""],
+			"nontaxable_amount (table)":["^Airport tax amount","",""],
+			"cgst_amount (table)":["^cgst amount","",""],
+			"cgst_percentage (table)":["^cgst rate","",""],
+			"sgst_amount (table)":["^sgst amount","",""],
+			"sgst_percentage (table)":["^sgst rate","",""],
+			"igst_amount (table)":["^igst amount","",""],
+			"igst_percentage (table)":["^igst rate","",""],
+			"total_amount (table)":["^Total Invoice Value","",""]
+
+		},
+		"Address":{
+			"address (Supplier)":["TATA SIA Airlines","^GSTN",3]
+		}
+	},
+	"AirAsia (India) Ltd":{
+		"LineThreshold" : 0.40,
+		"Simple": {
+			"invoice_number": ["^Number", "", ""],
+			"invoice_date": ["^Reference Invoice Date", "", ""],
+			"passenger_name":["^Passenger Name","",""],
+			"passender_address":["^Passenger Address","",""],
+			"pnr_number": ["^PNR No", "Flight", ""],
+			"flight_no":["^Flight No","Flight",""],
+			"flight_from":["^Flight From","Flight",""],
+			"flight_to":["\\sFlight To","",""],
+			"placeofsupply": ["\\splace of supply", "", ""],
+			"gst_no (Supplier)": ["^GSTN", "", ""],
+			"name (Receiver)": ["\\sCustomer Name", "Supply", ""],
+			"gst_no (Receiver)": ["^GSTIN of Customer", "Place", ""],
+			"currency":["^Amount in","",""]
+		},
+		"Address":{
+			"address (Supplier)":["AirAsia","^GSTN",4]
+		},
+		"table_config": {
+
+			"F0": {
+				"HeaderList": ["Description","SAC Code", "Taxable value /Exempt","Non Taxable Value", "Total", "Rate (%)","Amount (Rs.)","Total Invoice Value"],
+				"FinalHeader":["description","sac_code", "taxable_amount", "nontaxable_amount", "net_amount", "igst_percentage","igst_amount","total_amount"],
+				"FooterList": ["payable on Reverse"],
+				"ContinueTableWithoutHeader": false,
+				"SpecialCols": ["description"]
+			}
+		}
+	},
+	"Go Airlines (India) Ltd": {
+		"Simple": {
+			"invoice_number": ["^Invoice No", "", ""],
+			"invoice_date": ["^Invoice Date", "", ""],
+			"pnr_number": ["^PNR No", "Email", ""],
+			"pan": ["^PAN", "State Code", ""],
+			"placeofsupply": ["^place of supply", "", ""],
+			"flight_class":["^class","",""],
+			"sector": ["^Sector", "", ""],
+			"address (Supplier)": ["Registered Office", "", ""],
+			"gst_no (Supplier)": ["GSTIN of Supplier", "details", ""],
+			"cin (Supplier)": ["CIN", "", ""],
+			"name (Receiver)": ["\\sName", "", ""],
+			"gst_no (Receiver)": ["\\sGSTN\\/UIN", "", ""],
+			"address (Receiver)": ["\\sAddress", "", ""],
+			"state_code (Receiver)": ["\\sState Code", "", ""],
+			"emailid (Receiver)": ["\\sEmail ID of GSTN Holder", "", ""]
+		},
+		"Address":{},
+		"table_config": {
+
+			"F0": {
+				"DefaultValues":{
+					"igst_percentage":5
+				},
+				"HeaderList": ["Charge Code", "Charge Description", "Harmonized System Nomenclature (HSN)", "Description of Service", "Amount", "Discount", "Net Amount", "IGST 5.00%", "Total"],
+				"FinalHeader":["chargecode", "description", "sac_code", "description_1", "amount", "discount", "net_amount", "igst_amount", "total_amount"],
+				"FooterList": ["if you have"],
+				"ContinueTableWithoutHeader": false,
+				"SpecialCols": ["description_1"],
+				"DistanceThresold":2
+			}
+		}
+
+	},
+	"InterGlobe Aviation Limited": {
+
+		"Simple": {
+			"invoice_number": ["^Number", "", ""],
+			"invoice_date": ["^Date", "", ""],
+			"passenger_name":["^Passenger Name","",""],
+			"pnr_number": ["^PNR", "Flight", ""],
+			"flight_no": ["^Flight no", "From", ""],
+			"flight_from":["^from","to",""],
+			"flight_to":["^to","place",""],
+			"placeofsupply": ["^place of supply", "", ""],
+			"gst_no (Supplier)": ["^GSTIN", "details", ""],
+			"name (Receiver)": ["\\sCustomer Name", "", ""],
+			"gst_no (Receiver)": ["^GSTIN of Customer", "", ""],
+			"currency":["Currency","",""]
+		},
+		"Address":{
+			"address (Supplier)":["InterGlobe Aviation Limited","GSTIN",4]
+		},
+		"table_config": {
+
+			"F0": {
+				"HeaderList": ["Description", "SAC Code", "Taxable value","Non Taxable /Exempted Value", "Total", "Tax %","Amount","Tax %","Amount","Tax %","Amount","Total (Incl Taxes)"],
+				"FinalHeader":["description", "sac_code", "taxable_amount", "nontaxable_amount", "net_amount", "igst_percentage","igst_amount","cgst_percentage","cgst_amount","sgst_percentage","sgst_amount", "total_amount"],
+				"FooterList": ["1. Air travel"],
+				"ContinueTableWithoutHeader": false,
+				"SpecialCols": ["description"]
+			}
+		}
+	},
+	"SpiceJet Limited": {
+		"Simple": {
+			"invoice_number": ["^Invoice No", "", ""],
+			"invoice_date": ["^Invoice Date", "", ""],
+			"passenger_name":["^Passenger","",""],
+			"pnr_number": ["^PNR", "sector", ""],
+			"sector":["\\sSector","",""],
+			"placeofsupply": ["\\splace of supply", "", ""],
+			"gst_no (Supplier)": ["^GSTIN of SpiceJet Limited", "", ""],
+			"emailid (Supplier)":["^Email","",""],
+			"name (Receiver)": ["\\sCustomer Name", "state", ""],
+			"gst_no (Receiver)": ["^GSTIN \\/ UIN of Customer", "Place", ""],
+			"state_code (Receiver)":["\\sstate code","",""],
+			"emailid (Receiver)":["^Email of Registered Customer","Currency",""],
+			"currency":["\\sCurrency","",""]
+		},
+		"Address":{
+			"address (Supplier)":["SpiceJet Limited","^GSTIN",3]
+		},
+		"table_config": {
+
+			"F0": {
+				"HeaderList": ["S.No", "Description of Services","SAC Code", "Taxable value","Non Taxable / Exempted Value", "Total Value", "Rate %","Amount","Rate %","Amount","Rate %","Amount"],
+				"FinalHeader":["serial_no","description","sac_code", "taxable_amount", "nontaxable_amount", "net_amount", "igst_percentage","igst_amount","cgst_percentage","cgst_amount","sgst_percentage","sgst_amount"],
+				"FooterList": ["Total Invoice Value inclusive"],
+				"ContinueTableWithoutHeader": false,
+				"SpecialCols": ["description"]
+			}
+		}
+	}
+
+}
