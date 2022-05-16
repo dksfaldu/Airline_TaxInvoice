@@ -8,7 +8,7 @@ Created on Tue Apr 27 17:07:46 2021
 import json
 import re
 from datetime import datetime
-import pikepdf
+
 
 from PDF_Reader_New import read_list,add_line_number
 from Functions import LineBetween,find_isp,simple_field,find_values,extract_block_vals,get_line_values
@@ -30,9 +30,11 @@ PDF_folder = os.path.join(cwd,"PDFs")
 
 def extract_table_details(df, ISP_json):
 
+    ## Reading the config of line items.
     if "table_config" in ISP_json:
         config_dict = ISP_json["table_config"]
         
+        ## Extracting the line items through this function
         table_data = Extract_Table_pdf(df, config_dict)
         
         return table_data.to_dict("records")
@@ -43,13 +45,15 @@ def extract_table_details(df, ISP_json):
 def find_details(output_dict, sentence_level_data, page_level_data, df, ISP_json,ISPName):
 
     
-
+    # 
     if "LineBetween" in ISP_json:
         output_dict = LineBetween(sentence_level_data, ISP_json["LineBetween"], output_dict)
 
+    ## Simple fields which can be extracted using this function
     if "Simple" in ISP_json:
         output_dict = simple_field(sentence_level_data, page_level_data, ISP_json["Simple"], output_dict,ISPName)
 
+    ## Extracting UpSide down fields which is not available for Airline Invoices. Ignore this function
     if "Updown" in ISP_json and len(df) > 0:
 
         for key, value in ISP_json["Updown"].items():
@@ -59,7 +63,7 @@ def find_details(output_dict, sentence_level_data, page_level_data, df, ISP_json
                     output_dict[key] = v1
                     #output_dict[key + "_wordlocation"] = v2
 
-    
+    ## Divide the sector value to From and To.
     if "sector" in output_dict:
         sector = output_dict["sector"]
         state_list = sector.split("-")
@@ -74,6 +78,8 @@ def find_details(output_dict, sentence_level_data, page_level_data, df, ISP_json
                 output_dict["flight_to"] = state_list[1].strip()
                 del output_dict["sector"]
 
+
+    ## Address fields which is extracted from starting of the line
     if "Address" in ISP_json and len(df) > 0:
 
         for key, value_list in ISP_json["Address"].items():
@@ -131,16 +137,22 @@ def extract_bill(pdf_file_path):
 
     df,page_level_data,sentence_level_data = read_list(pdf_file_path)
 
+    ## Find out the Supplier name 
     ISPName = find_isp(field_info_json, sentence_level_data)
 
     if ISPName in field_info_json:
 
         print(ISPName)
+        ## Take the configuration of the supplier
         ISP_json = field_info_json[ISPName]
+
+        ## If any different thresold used for that supplier then again read the document with new threshold
         if "LineThreshold" in ISP_json:
             df,page_level_data,sentence_level_data = read_list(pdf_file_path,ISP_json["LineThreshold"])
         
         output_dict["name (Supplier)"] = ISPName
+
+        ## Extract all the deatils
         output_dict = find_details(output_dict, sentence_level_data, page_level_data, df, ISP_json,ISPName)
         ## Process it further
         output_dict["Status"] = "Success"
