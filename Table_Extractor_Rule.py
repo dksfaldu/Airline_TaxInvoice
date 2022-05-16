@@ -39,9 +39,9 @@ def find_width_of_columns(header_data, column_name):
             for ff in out_list:
                 new_out_list.extend(ff.split())
             index_list = list(row_df.index)
-            print(h_list,out_list)
+            # print(h_list,out_list)
             if fuzz.token_set_ratio(h_list, new_out_list) == 100 and len(new_out_list)>=len(h_list):
-                print("#############")
+                # print("#############")
                 width_of_columns.append([min(row_df['x']), max(row_df['w'])])
                 if len(index_list)==1:
                     header_data.loc[index_list[0],"Columns"]=ind+1

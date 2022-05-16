@@ -141,7 +141,8 @@ def extract_bill(pdf_file_path):
     ISPName = find_isp(field_info_json, sentence_level_data)
 
     if ISPName in field_info_json:
-
+        
+        
         print(ISPName)
         ## Take the configuration of the supplier
         ISP_json = field_info_json[ISPName]
@@ -169,7 +170,7 @@ def extract_bill(pdf_file_path):
 
 
 if __name__ == '__main__':
-    pdf_file_path = r"D:/Work/UpWork/John/Data/Airasia.pdf"
+    pdf_file_path = r"D:/Work/UpWork/John/Data/Indigo.pdf"
     
     output_json = extract_bill(pdf_file_path)
     

@@ -54,7 +54,7 @@ def convert_to_format(list_of_json):
             if key in values:
                 
                 values[key] = convert_amount(values[key])
-            elif key in ["discount"]:
+            elif key in ["discount","igst_amount","sgst_amount","cgst_amount"]:
                 values[key] = 0
         
         

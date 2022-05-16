@@ -41,6 +41,9 @@
 	},
 	"AirAsia (India) Ltd":{
 		"LineThreshold" : 0.40,
+		"LineBetween":{
+			"placeofsupply":[["Place of","Supply"]]
+		},
 		"Simple": {
 			"invoice_number": ["^Number", "", ""],
 			"invoice_date": ["^Reference Invoice Date", "", ""],
@@ -115,7 +118,7 @@
 			"flight_no": ["^Flight no", "From", ""],
 			"flight_from":["^from","to",""],
 			"flight_to":["^to","place",""],
-			"placeofsupply": ["^place of supply", "", ""],
+			"placeofsupply": ["\\sPlace of Supply", "", ""],
 			"gst_no (Supplier)": ["^GSTIN", "details", ""],
 			"name (Receiver)": ["\\sCustomer Name", "", ""],
 			"gst_no (Receiver)": ["^GSTIN of Customer", "", ""],
