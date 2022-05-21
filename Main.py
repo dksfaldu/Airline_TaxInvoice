@@ -170,7 +170,7 @@ def extract_bill(pdf_file_path):
 
 
 if __name__ == '__main__':
-    pdf_file_path = r"D:/Work/UpWork/John/Data/Indigo.pdf"
+    pdf_file_path = r"D:/Work/UpWork/John/Data/Vistara.pdf"
     
     output_json = extract_bill(pdf_file_path)
     

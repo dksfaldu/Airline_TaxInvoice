@@ -9,8 +9,8 @@
 	},
 	"TATA SIA Airlines Limited":{
 		"Simple": {
-			"invoice_number": ["^Invoice No.", "", ""],
-			"invoice_date": ["^Invoice Date", "", ""],
+			"invoice_number": ["\\sInvoice No.", "", ""],
+			"invoice_date": ["\\sInvoice Date", "", ""],
 			"passenger_name":["^Passenger Name","",""],
 			"pnr_number": ["^Ticket number", "", ""],
 			"flight_from":["^Place of Embarkation","",""],
